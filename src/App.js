@@ -1,24 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Messanger from "./screens/messanger";
+import { GoogleOAuthProvider } from '@react-oauth/google';
+import AccountProvider from "./context/accountprovider";
 
 function App() {
+  const clientId = "635125846435-ts3ng18bmri9nribag9569a8ii1ho30t.apps.googleusercontent.com"
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+    <GoogleOAuthProvider clientId={clientId} >
+      <AccountProvider>
+      <Router>
+        <Routes>
+          <Route exact path="/" element={<Messanger/>}></Route>
+        </Routes>
+       </Router>
+      </AccountProvider>
+    </GoogleOAuthProvider>
+    </>
   );
 }
 
